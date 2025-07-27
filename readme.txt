@@ -35,3 +35,7 @@ curl -X PUT http://localhost:3000/api/trips/id \
 Удаление похода:
 curl -X DELETE http://localhost:3000/api/trips/id \
   -H "Authorization: Bearer YOUR_JWT_TOKEN"
+
+Текущий пользователь:
+curl -X GET http://localhost:3000/api/user/me \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"

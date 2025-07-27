@@ -37,7 +37,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /api/trips/:id - Получить поход по ID
 router.get('/:id', auth, async (req, res) => {
   try {
     const trip = await Trip.findByPk(req.params.id, {
@@ -65,29 +64,6 @@ router.get('/:id', auth, async (req, res) => {
   }
 });
 
-router.post('/:id/members', auth, async (req, res) => {
-  try {
-    const trip = await Trip.findByPk(req.params.id);
-    if (!trip) return res.status(404).json({ error: 'Поход не найден' });
-
-    const user = await User.findByPk(req.body.userId);
-    if (!user) return res.status(404).json({ error: 'Пользователь не найден' });
-
-    // Используем метод create через модель TripParticipant
-    await TripParticipant.create({
-      tripId: trip.id,
-      userId: user.id,
-      role: 'participant',
-      status: 'pending'
-    });
-
-    res.json({ message: 'Пользователь добавлен к походу' });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// Обновление похода
 router.put('/:id', auth, async (req, res) => {
   const [updated] = await Trip.update(req.body, {
     where: { id: req.params.id, creatorId: req.user.id }
@@ -100,7 +76,6 @@ router.put('/:id', auth, async (req, res) => {
   }
 });
 
-// Удаление похода (мягкое удаление)
 router.delete('/:id', auth, async (req, res) => {
   const deleted = await Trip.destroy({
     where: { id: req.params.id, creatorId: req.user.id }

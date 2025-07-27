@@ -10,14 +10,15 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// рут auth
+// роут auth
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
+//роут user
 const usersRouter = require('./routes/user');
 app.use('/api/user', usersRouter);
 
-// рут trips
+// роут trips
 app.use('/api/trips', require('./routes/trips'));
 
 // гет тестовый

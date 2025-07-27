@@ -7,7 +7,7 @@ module.exports = async (req, res, next) => {
     if (!token) return res.status(401).json({ error: 'Требуется авторизация' });
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('Decoded token payload:', decoded); // Логируем декодированные данные
+    console.log('Decoded token payload:', decoded);
 
     const user = await User.findByPk(decoded.id);
     if (!user) {

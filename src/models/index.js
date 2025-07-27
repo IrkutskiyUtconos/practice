@@ -6,8 +6,6 @@ const sequelize = new Sequelize(config);
 const User = require('./user')(sequelize, Sequelize);
 const Trip = require('./trip')(sequelize, Sequelize);
 
-// Связи между моделями
-
 User.hasMany(Trip, { foreignKey: 'creatorId' });
 Trip.belongsTo(User, { foreignKey: 'creatorId' });
 
