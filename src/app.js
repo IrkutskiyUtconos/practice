@@ -14,6 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
+const usersRouter = require('./routes/user');
+app.use('/api/user', usersRouter);
+
 // рут trips
 app.use('/api/trips', require('./routes/trips'));
 

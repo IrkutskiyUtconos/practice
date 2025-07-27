@@ -43,12 +43,10 @@ module.exports = (sequelize) => {
   User.associate = (models) => {
     User.hasMany(models.Trip, {
       foreignKey: 'creatorId',
-      as: 'createdTrips'
     });
     User.belongsToMany(models.Trip, {
       through: models.TripParticipant,
       foreignKey: 'userId',
-      as: 'joinedTrips' // Уникальный алиас для походов участника
     });
   };
 
