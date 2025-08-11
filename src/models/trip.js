@@ -4,6 +4,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    description: {
+      type: DataTypes.TEXT
+    },
     startDate: {
       type: DataTypes.DATEONLY,
       allowNull: false
@@ -11,9 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     difficulty: {
       type: DataTypes.ENUM('easy', 'medium', 'hard'),
       defaultValue: 'medium'
-    }
+    },
   }, {
-    paranoid: false
+    paranoid: true,
+    deletedAt: 'deletedAt',
+    timestamps: true
   });
 
   Trip.associate = function(models) {
